@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:web_admin/trainTicket.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'package:web_admin/pages/app.dart';
+import 'constants.dart';
 
 void main() {
-  runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(
+    const ProviderScope(
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -11,13 +20,20 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'train-ticket',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarBrightness: Brightness.dark,
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark,
+        systemNavigationBarColor: whiteColor,
       ),
-      home: const TrainTicket(),
+    );
+    return MaterialApp(
+      title: 'Booking',
+      theme: ThemeData(
+        primarySwatch: appColor,
+      ),
+      home: const AppPage(),
     );
   }
 }
